@@ -23,6 +23,25 @@
 | 4A | NLL Loss | SGD | 0% | 44 | 34 | 0.1102 | 0.2498 | 91.67% |
 | 4B | NLL Loss | SGD | 25% | 58 | 40 | 0.1190 | 0.2428 | 91.58% |
 
+## Extra Experiments (SGD Tuning)
+
+Given that dropout reduced test accuracy in the SGD-based runs, and considering that SGD may require longer training to improve validation loss compared to Adam, additional experiments were conducted with:
+- Dropout: 0%
+- Early stopping patience: 20 epochs
+- Different learning rates
+
+| Learning Rate | Best/Stop Epoch | Training Loss | Validation Loss | Test Accuracy |
+|---|---:|---:|---:|---:|
+| 0.03 | 53 | 0.0588 | 0.4384 | 88.86% |
+| 0.10 | 21 | 2.0053 | 2.0043 | 19.47% |
+| 0.003 | 91 | 0.1232 | 0.2956 | 89.56% |
+
+Interpretation:
+1. SGD showed high sensitivity to the learning rate.
+2. A high learning rate (0.10) led to clear optimization failure.
+3. Learning rate 0.03 produced low training loss but poor validation/test performance, indicating overfitting.
+4. Learning rate 0.003 was more stable, but still did not surpass the best SGD baseline reported earlier (91.93%) nor the best Adam configuration (92.63%).
+
 ## Key Takeaways
 1. Best test accuracy was Version 2B (NLL Loss + Adam + 50% dropout): 92.63%.
 2. Adding Dropout increased accuracy on average by 1,014x on Adam setups.
