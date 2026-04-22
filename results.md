@@ -117,3 +117,26 @@ Epoch 250	Training Loss: 0.2726	Validation Loss: 0.3278
 Stopped epoch: 250
 Best epoch: 230
 Test accuracy: 87.23%
+
+
+def __init__(self, input_dim=3 * 28 * 28, hidden1=1024, hidden2=256, num_classes=8, dropout=0.5):
+LEARNING_RATE = 0.0001   # 0.01 for sgd
+MOMENTUM = 0.9
+DROPOUT = 0.3
+PATIENCE = 50
+EARLY_STOPIING_DELTA = 0.0002
+epoch 298	Training Loss: 0.2507	Validation Loss: 0.3436
+Stopped epoch: 298
+Best epoch: 248
+Test accuracy: 87.43%
+
+def __init__(self, input_dim=3 * 28 * 28, hidden1=768, hidden2=256, num_classes=8, dropout=0.5):
+LEARNING_RATE = 0.0001   # 0.01 for sgd
+MOMENTUM = 0.9
+DROPOUT = 0.3
+PATIENCE = 50
+EARLY_STOPIING_DELTA = 0.0002
+Epoch 350	Training Loss: 0.2236	Validation Loss: 0.3366
+Stopped epoch: 350
+Best epoch: 341
+Test accuracy: 87.23%
