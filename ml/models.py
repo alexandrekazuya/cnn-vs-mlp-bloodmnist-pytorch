@@ -32,7 +32,7 @@ class CNN(nn.Module):
 
 
 class MLP(nn.Module):
-    def __init__(self, input_dim=3 * 28 * 28, hidden1=512, hidden2=128, num_classes=8, dropout=0.5):
+    def __init__(self, input_dim=3 * 28 * 28, hidden1=1024, hidden2=256, num_classes=8, dropout=0.5):
         super().__init__()
         self.net = nn.Sequential(
             nn.Flatten(),

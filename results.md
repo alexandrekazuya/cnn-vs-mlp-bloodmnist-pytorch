@@ -140,3 +140,15 @@ Epoch 350	Training Loss: 0.2236	Validation Loss: 0.3366
 Stopped epoch: 350
 Best epoch: 341
 Test accuracy: 87.23%
+
+LEARNING_RATE = 0.0001   # 0.01 for sgd
+MOMENTUM = 0.9
+DROPOUT = 0.3
+PATIENCE = 50
+EARLY_STOPIING_DELTA = 0.0002
+WEIGHT_DECAY = 5e-5
+
+Epoch 329	Training Loss: 0.1752	Validation Loss: 0.3188
+Stopped epoch: 329
+Best epoch: 279
+Test accuracy: 88.40%

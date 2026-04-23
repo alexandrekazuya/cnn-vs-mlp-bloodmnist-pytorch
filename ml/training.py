@@ -36,7 +36,16 @@ class EarlyStopping:
             model.load_state_dict(self.best_model_state)
 
 
-def train_with_validation(model, train_loader, val_loader, criterion, optimizer, device, epochs=100, early_stopping=None):
+def train_with_validation(
+    model,
+    train_loader,
+    val_loader,
+    criterion,
+    optimizer,
+    device,
+    epochs=100,
+    early_stopping=None,
+):
     history = {
         "train_loss": [],
         "val_loss": [],
