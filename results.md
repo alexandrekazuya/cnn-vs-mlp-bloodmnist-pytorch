@@ -81,3 +81,27 @@ Interpretation:
 4. Moderate regularization helped most: weight decay 5e-5 was better than 5e-4 and no weight decay in the strongest long runs.
 5. Increasing MLP width alone did not beat the best regularized 512/128 setup in this project.
 6. Final comparison supports the assignment goal: CNN remained better than MLP on BloodMNIST (92.63% vs 88.40%, a 4.23-point gap).
+
+
+
+
+
+
+
+
+## CNN Additional Tuning (Replicated Runs)
+
+### Tested Configurations
+
+| ID | Optimizer | LR | Dropout | Weight Decay | Patience | Delta | Batch Size | Best Epoch Info | Test Accuracy Runs | Mean Accuracy |
+|---|---|---:|---:|---:|---:|---:|---:|---|---|---:|
+| C1 | Adam | 0.0005 | 0.5 | 1e-4 | 30 | 0.0002 | 128 | best=21, stopped=51, train=0.0926, val=0.1752 | 92.52 | 92.52% |
+| C2 | Adam | 0.0003 | 0.5 | 2e-4 | 20 | 0.0005 | 128 | best=34, stopped=54, train=0.0569, val=0.1682 | 94.04, 93.25, 93.48 | 93.59% |
+| C3 | Adam | 0.0005 | 0.5 | 3e-4 | 20 | 0.0005 | 128 | best=15, stopped=30 | 92.05 | 92.05% |
+| C4 | Adam | 0.0003 | 0.6 | 2e-4 | 15 | 0.0005 | 128 | best=21, stopped=36, train=0.1349, val=0.1727 | 92.72 | 92.72% |
+| C5 | Adam | 0.0003 | 0.5 | 2e-4 | 20 | 0.0005 | 64 | best=19, stopped=34, train=0.1046, val=0.1499 | 93.80, 93.28, 91.67 | 92.92% |
+
+### Best Run Summary
+1. Best single CNN result observed: 94.04% (Configuration C2).
+2. Best replicated mean result: 93.59% (Configuration C2, batch size 128).
+3. Configuration C2 also produced a stronger mean than the batch size 64 variant (C5: 92.92%).
