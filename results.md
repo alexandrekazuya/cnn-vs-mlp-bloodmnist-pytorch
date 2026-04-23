@@ -50,105 +50,34 @@ Interpretation:
 5. NLL Loss delivered a slightly higher average test accuracy than Cross Entropy (91.91% vs 91.35%), which is about 1.006x better overall.
 6. Adam achieved a slightly higher average test accuracy than SGD (91.75% vs 91.51%), which is about 1.003x better overall.
 
-MLP
+## MLP Results
 
-Epoch 39	Training Loss: 0.8730	Validation Loss: 0.6224
-Stopped epoch: 59
-Best epoch: 39
-Test accuracy: 73.05%
+### Experimental Protocol
+- Loss function: Cross Entropy
+- Optimizers tested: Adam and SGD (single confirmation run)
+- Early stopping and epoch budget were progressively increased for long-run tuning
+- Architecture variants tested: 512/128, 1024/256, and 768/256 hidden sizes
 
-LEARNING_RATE = 0.001  # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.5
-PATIENCE = 20
-EARLY_STOPIING_DELTA = 0.01
+### Consolidated Results
 
-Epoch 62	Training Loss: 0.4612	Validation Loss: 0.4358
-Stopped epoch: 62
-Best epoch: 42
-Test accuracy: 82.43%
+| Run | Hidden Layers | Optimizer | Learning Rate | Dropout | Patience | Delta | Weight Decay | Stopped Epoch | Best Epoch | Train Loss | Validation Loss | Test Accuracy |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| M1 | 512 / 128 | Adam | 0.0010 | 0.50 | 20 | 0.0100 | 0 | 59 | 39 | 0.8730 | 0.6224 | 73.05% |
+| M2 | 512 / 128 | Adam | 0.0003 | 0.25 | 20 | 0.0100 | 0 | 62 | 42 | 0.4612 | 0.4358 | 82.43% |
+| M3 | 512 / 128 | Adam | 0.0010 | 0.50 | 30 | 0.0010 | 0 | 64 | 34 | 0.8608 | 0.6728 | 73.57% |
+| M4 | 512 / 128 | Adam | 0.0005 | 0.40 | 30 | 0.0010 | 0 | 100 | 92 | 0.6085 | 0.4657 | 82.40% |
+| M5 | 512 / 128 | Adam | 0.0010 | 0.30 | 40 | 0.0005 | 0 | 100 | 99 | 0.4240 | 0.4135 | 83.02% |
+| M6 | 512 / 128 | Adam | 0.0001 | 0.30 | 40 | 0.0005 | 0 | 250 | 230 | 0.2726 | 0.3278 | 87.23% |
+| M7 | 1024 / 256 | Adam | 0.0001 | 0.30 | 50 | 0.0002 | 0 | 298 | 248 | 0.2507 | 0.3436 | 87.43% |
+| M8 | 768 / 256 | Adam | 0.0001 | 0.30 | 50 | 0.0002 | 0 | 350 | 341 | 0.2236 | 0.3366 | 87.23% |
+| M9 | 512 / 128 | Adam | 0.0001 | 0.30 | 50 | 0.0002 | 5e-5 | 329 | 279 | 0.1752 | 0.3188 | 88.40% |
+| M10 | 512 / 128 | Adam | 0.0001 | 0.30 | 50 | 0.0002 | 5e-4 | 330 | 280 | 0.2430 | 0.3307 | 87.43% |
+| M11 | 512 / 128 | SGD | 0.0010 | 0.00 | 50 | 0.0002 | 5e-4 | 413 | 363 | 0.1918 | 0.3442 | 86.70% |
 
-LEARNING_RATE = 0.0003  # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.25
-PATIENCE = 20
-EARLY_STOPIING_DELTA = 0.01
-
-
-Epoch 64	Training Loss: 0.8608	Validation Loss: 0.6728
-Stopped epoch: 64
-Best epoch: 34
-Test accuracy: 73.57%
-LEARNING_RATE = 0.001  # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.5
-PATIENCE = 30
-EARLY_STOPIING_DELTA = 0.001
-
-
-
-Epoch 100	Training Loss: 0.6085	Validation Loss: 0.4657
-Stopped epoch: 100
-Best epoch: 92
-Test accuracy: 82.40%
-LEARNING_RATE = 0.0005
-DROPOUT = 0.4
-patience = 30
-delta = 0.001
-
-
-Epoch 100	Training Loss: 0.4240	Validation Loss: 0.4135
-Stopped epoch: 100
-Best epoch: 99
-Test accuracy: 83.02%
-LEARNING_RATE = 0.001
-DROPOUT = 0.3
-patience = 40
-delta = 0.0005
-
-
-def __init__(self, input_dim=3 * 28 * 28, hidden1=512, hidden2=128, num_classes=8, dropout=0.5):
-LEARNING_RATE = 0.0001   # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.3
-PATIENCE = 40
-EARLY_STOPIING_DELTA = 0.0005
-Epoch 250	Training Loss: 0.2726	Validation Loss: 0.3278
-Stopped epoch: 250
-Best epoch: 230
-Test accuracy: 87.23%
-
-
-def __init__(self, input_dim=3 * 28 * 28, hidden1=1024, hidden2=256, num_classes=8, dropout=0.5):
-LEARNING_RATE = 0.0001   # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.3
-PATIENCE = 50
-EARLY_STOPIING_DELTA = 0.0002
-epoch 298	Training Loss: 0.2507	Validation Loss: 0.3436
-Stopped epoch: 298
-Best epoch: 248
-Test accuracy: 87.43%
-
-def __init__(self, input_dim=3 * 28 * 28, hidden1=768, hidden2=256, num_classes=8, dropout=0.5):
-LEARNING_RATE = 0.0001   # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.3
-PATIENCE = 50
-EARLY_STOPIING_DELTA = 0.0002
-Epoch 350	Training Loss: 0.2236	Validation Loss: 0.3366
-Stopped epoch: 350
-Best epoch: 341
-Test accuracy: 87.23%
-
-LEARNING_RATE = 0.0001   # 0.01 for sgd
-MOMENTUM = 0.9
-DROPOUT = 0.3
-PATIENCE = 50
-EARLY_STOPIING_DELTA = 0.0002
-WEIGHT_DECAY = 5e-5
-
-Epoch 329	Training Loss: 0.1752	Validation Loss: 0.3188
-Stopped epoch: 329
-Best epoch: 279
-Test accuracy: 88.40%
+### Key Takeaways (MLP)
+1. Best MLP test accuracy was 88.40% (M9: Adam, LR 0.0001, dropout 0.3, patience 50, delta 0.0002, weight decay 5e-5).
+2. Longer training with lower learning rate was critical: MLP performance improved from 73.05% (M1) to 88.40% (M9).
+3. Adam consistently outperformed the single SGD confirmation run (88.40% vs 86.70%).
+4. Moderate regularization helped most: weight decay 5e-5 was better than 5e-4 and no weight decay in the strongest long runs.
+5. Increasing MLP width alone did not beat the best regularized 512/128 setup in this project.
+6. Final comparison supports the assignment goal: CNN remained better than MLP on BloodMNIST (92.63% vs 88.40%, a 4.23-point gap).
