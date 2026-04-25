@@ -83,12 +83,6 @@ Interpretation:
 6. Final comparison supports the assignment goal: CNN remained better than MLP on BloodMNIST (92.63% vs 88.40%, a 4.23-point gap).
 
 
-
-
-
-
-
-
 ## CNN Additional Tuning (Replicated Runs)
 
 ### Tested Configurations
@@ -105,3 +99,15 @@ Interpretation:
 1. Best single CNN result observed: 94.04% (Configuration C2).
 2. Best replicated mean result: 93.59% (Configuration C2, batch size 128).
 3. Configuration C2 also produced a stronger mean than the batch size 64 variant (C5: 92.92%).
+
+
+
+## Why (CNN vs MLP)?
+CNNs are significantly superior to MLPs for image classification because they preserve spatial structure and use parameter sharing, whereas MLPs flatten images, causing loss of context, higher complexity, and lower accuracy
+CNNs excel at feature extraction (edges, patterns) through local connections, while MLPs are prone to overfitting and struggle with spatial variations.
+
+Spatial Information: CNNs maintain the 2D structure of images, recognizing spatial correlations between pixels. MLPs flatten images into a 1D vector, losing this structure.
+
+Parameters: CNNs use fewer parameters due to parameter sharing (kernels/filters), making them efficient. MLPs are fully connected, resulting in too many parameters and, consequently, high redundancy and computational cost.
+
+Translation Invariance: CNNs can identify features regardless of their location in the image. MLPs struggle if an object shifts location (e.g., top-left vs. bottom-right).

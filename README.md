@@ -1,29 +1,49 @@
-# cnn-vs-mlp-bloodmnist-pytorch
+# CNN vs MLP on BloodMNIST (PyTorch)
 
-This project explores supervised image classification on BloodMNIST (MedMNIST v2) using PyTorch.
+This project compares Convolutional Neural Networks (CNN) and Multi-Layer Perceptrons (MLP) for BloodMNIST image classification (MedMNIST v2) using PyTorch.
 
-Current status:
-- Implemented a reusable training pipeline with train/validation/test splits.
-- Added modular code for data loading, models, setup, and training utilities.
-- Added a clean experiment notebook to run CNN or MLP from a single switch.
-- Recorded experimental results and comparisons in [results.md](results.md).
+## Final Outcome
 
-## Project structure
+- Best single CNN run: 94.04%
+- Best replicated CNN mean: 93.59%
+- Best MLP run: 88.40%
+- Final conclusion: CNN outperformed MLP by a clear margin on this dataset.
 
-- `ml/data.py`: BloodMNIST dataset + dataloaders
-- `ml/models.py`: `CNN` and `MLP` model classes
-- `ml/setup.py`: device, loss, and optimizer builders
-- `ml/training.py`: `EarlyStopping`, training loop, and test evaluation
-- `experiments.ipynb`: notebook runner for experiments
-- `notebook.ipynb`: original working notebook
+See full experiment logs, tables, and replicated runs in [results.md](results.md).
 
-## Quick start (MLP or CNN)
+## Why CNN Won
 
-1. Open `experiments.ipynb`.
+CNN performed better because image-specific inductive biases matter:
+- It preserves spatial information in 2D images.
+- It uses local receptive fields and parameter sharing.
+- It is more robust to positional variation and usually generalizes better than a flattened-input MLP.
+
+## Project Structure
+
+- [ml/data.py](ml/data.py): BloodMNIST dataset loading and dataloaders
+- [ml/models.py](ml/models.py): CNN and MLP model definitions
+- [ml/setup.py](ml/setup.py): device, criterion, and optimizer builders
+- [ml/training.py](ml/training.py): training loop, early stopping, evaluation
+- [experiments.ipynb](experiments.ipynb): main experiment runner
+- [legacynotebook.ipynb](legacynotebook.ipynb): original legacy notebook
+- [results.md](results.md): all experimental results and analysis
+
+## Reproduce Experiments
+
+1. Open [experiments.ipynb](experiments.ipynb).
 2. Run cells from top to bottom.
-3. In the config cell, set:
-	- `MODEL_NAME = 'mlp'` for MLP baseline or `MODEL_NAME = 'cnn'` for CNN
-	- `OPTIMIZER_NAME = 'adam'` or `'sgd'`
+3. In the configuration cell, choose model and hyperparameters.
 4. Run training and evaluation cells.
+5. Record outcomes in [results.md](results.md).
 
-This flow runs only the selected model, so you can train MLP without running CNN.
+## Best CNN Configuration (Replicated Winner)
+
+- Optimizer: Adam
+- Learning rate: 0.0003
+- Dropout: 0.5
+- Weight decay: 2e-4
+- Patience: 20
+- Delta: 0.0005
+- Batch size: 128
+
+This was the strongest replicated setup in this project.
